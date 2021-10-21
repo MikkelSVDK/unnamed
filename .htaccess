@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	RewriteBase /
+
+	RewriteRule ^genre/(.*)?$ /genre.php?q=$1 [L,QSA]
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+	ErrorDocument 404 /missing.php
+	Redirect 404 /404
+	RewriteCond %{ENV:REDIRECT_STATUS} !=404
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule .* /404 [L]
+</IfModule>
