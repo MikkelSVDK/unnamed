@@ -1,7 +1,12 @@
 <?php
 require("includes/functions/core.php");
 
-$genreMovieList = listGenreMovies('action', 1);
+if(empty($_GET["q"])){
+  header("Location: /");
+  die();
+}
+
+$genreMovieList = listGenreMovies($_GET["q"], @$_GET["page"] ?: 1);
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,7 +23,7 @@ $genreMovieList = listGenreMovies('action', 1);
       <div class="row">
 <?php foreach ($genreMovieList["movies"] as $movie) { ?>
         <div class="col-xl-2 col-md-3 col-sm-6 movie-poster">
-          <a href="#">
+          <a href="/movie/<?= $movie->Id ?>">
             <img src="<?= $movie->Thumbnail ?>" alt="movie poster" class="img-fluid" />
           </a>
           <p class="text-center"><?= $movie->Title ?></p>

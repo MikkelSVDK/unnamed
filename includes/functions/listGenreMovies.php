@@ -33,9 +33,9 @@ function listGenreMovies(string $genre, int $page = 1, int $per_page = 60){
 
     $tempMovie->Id = $movieId;
     $tempMovie->Title = $movie['title'];
-    $tempMovie->Thumbnail = $movie['plprogram$thumbnails']['orig-396x272']['plprogram$url'];
+    $tempMovie->Thumbnail = @$movie['plprogram$thumbnails']['orig-396x272']['plprogram$url'] ?: '/img/poster/none.png';
     $tempMovie->Slug = $movie['tdc$urlSlug'];
-    $tempMovie->YoutubeTrailer = $movie['tdc$youtubeTrailer'];
+    $tempMovie->YoutubeTrailer = @$movie['tdc$youtubeTrailer'] ?: 'none';
 
     array_push($returnArr["movies"], $tempMovie);
   }

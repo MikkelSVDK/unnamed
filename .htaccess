@@ -3,6 +3,7 @@
 	RewriteBase /
 
 	RewriteRule ^genre/(.*)?$ /genre.php?q=$1 [L,QSA]
+	RewriteRule ^movie/(.*)?$ /movie.php?q=$1 [L,QSA]
 
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteRule ^([^\.]+)$ $1.php [NC,L]
