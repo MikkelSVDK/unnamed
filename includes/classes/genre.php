@@ -33,8 +33,11 @@ class Genre extends Movie {
    * @param int $page  Page number if you wish to load more movies
    * @return array 
    */
-  public function recommendedMovies(){
-    $res = file_get_contents("https://feed.entertainment.tv.theplatform.eu/f/jGxigC/bb-all-pas?form=json&byTags=genre:" . $this->Slug . "&count=true&sort=:sortDate|desc&range=1-6&fields=id,title,thumbnails,programType,:urlSlug,:youtubeTrailer,pubDate&lang=da");
+  public function recommendedMovies(int $page = 1, int $per_page = 6){
+    $firstIndex = (($page - 1) * $per_page) + 1;
+    $lastIndex = (($page - 1) * $per_page) + $per_page;
+
+    $res = file_get_contents("https://feed.entertainment.tv.theplatform.eu/f/jGxigC/bb-all-pas?form=json&byTags=genre:" . $this->Slug . "&q=(estProductAvailability%3A\"available\"%20OR%20tvodProductAvailability%3A\"available\")&count=true&sort=:sortDate|desc&range=$firstIndex-$lastIndex&fields=id,title,thumbnails,programType,:urlSlug,:youtubeTrailer,pubDate&lang=da");
     $resData = json_decode($res, true);
     // $movie['plprogram$programType'];
 
@@ -47,7 +50,7 @@ class Genre extends Movie {
       $tempMovie = new Movie();
 
       $tempMovie->Id = $movieId;
-      $tempMovie->Slug = $movie['tdc$urlSlug'];
+      $tempMovie->Slug = @$movie['tdc$urlSlug'] ?: 'none';
       $tempMovie->Title = $movie['title'];
       $tempMovie->Thumbnail = count($movie['plprogram$thumbnails']) > 0 ? $movie['plprogram$thumbnails']['orig-396x272']['plprogram$url'] : '/img/poster/none.png';
       $tempMovie->YoutubeTrailer = $movie['tdc$youtubeTrailer'];

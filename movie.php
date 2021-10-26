@@ -25,33 +25,29 @@ $movie = new Movie($_GET["q"]);
         <div class="col-lg-12">
           <h1><?= $movie->Title ?></h1>
         </div>
-        <div class="col-lg-3" style="margin-bottom:10px">
-          <b>
-            <b style="color:#ff527f">
-              IMDb Vurdering: 1
-            </b>
-          </b>
+        <div class="col-lg-4" style="margin-bottom:10px">
+          <b class="movie-highlight"> 
+            Længde: <?= gmdate("H\h i\m", $movie->Runtime) ?>
+          </b> 
         </div>
-        <div class="col-lg-3">
-          <b>
-            <b style="color:#ff527f"> 
-              Længde: 1
-            </b> 
-          </b>
+        <div class="col-lg-4">
+          <b class="movie-highlight"> 
+            Genre: 
+<?php
+$i = 0;
+foreach ($movie->Genres as $key => $genre) {
+  if($i > 0)
+    echo ", ";
+  echo $genre['plprogram$title'];
+  $i++;
+}
+?>
+          </b> 
         </div>
-        <div class="col-lg-3">
-          <b>
-            <b style="color:#ff527f"> 
-              Genre: 1
-            </b> 
-          </b>
-        </div>
-        <div class="col-lg-3">
-          <b>
-            <b style="color:#ff527f">
-              Udgivelse: 1
-            </b> 
-          </b>
+        <div class="col-lg-4">
+          <b class="movie-highlight">
+            Udgivelse: <?= date("d. M Y", strtotime($movie->ReleaseDate)) ?>
+          </b> 
         </div>
       </div>
 
@@ -60,8 +56,12 @@ $movie = new Movie($_GET["q"]);
           <img class="img-fluid" src="<?= $movie->Poster ?>" alt="movie poster">
         </div>
         <div class="col-lg-9">
-          <?= $movie->YoutubeTrailer ?>
+          <?php if($movie->YoutubeTrailer != 'none'): ?>
+          <div class="youtube-box">
+            <iframe class="youtube" width="100%" height="auto" src="https://www.youtube.com/embed/<?= $movie->YoutubeTrailer ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
           <br><br>
+          <?php endif; ?>
           <h3>
             <b>Beskrivelse</b>
           </h3>
@@ -74,22 +74,33 @@ $movie = new Movie($_GET["q"]);
       <div class="row" style="margin-top: 10px">
         <div class="col-lg-4">
           <b>
-            <b style="color:#ff527f">
-              Indstruktør: 0
+            <b class="movie-highlight">
+              Indstruktør:
+<?php
+$i = 0;
+foreach ($movie->Directors as $director) {
+  if($i > 0)
+    echo ", ";
+  echo $director['plprogram$personName'];
+  $i++;
+}
+?>
             </b> 
           </b>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-8">
           <b>
-            <b style="color:#ff527f">
-              Sriver: 0
-            </b> 
-          </b>
-        </div>
-        <div class="col-lg-4">
-          <b>
-            <b style="color:#ff527f">
-              Stjerner: 0
+            <b class="movie-highlight">
+              Stjerner: 
+<?php
+$i = 0;
+foreach ($movie->Actors as $key => $actor) {
+  if($i > 0)
+    echo ", ";
+  echo $actor['plprogram$personName'];
+  $i++;
+}
+?>
             </b> 
           </b>
         </div>

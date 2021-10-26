@@ -11,7 +11,7 @@ function listGenreMovies(string $genre, int $page = 1, int $per_page = 60){
   $firstIndex = (($page - 1) * $per_page) + 1;
   $lastIndex = (($page - 1) * $per_page) + $per_page;
 
-  $res = file_get_contents("https://feed.entertainment.tv.theplatform.eu/f/jGxigC/bb-all-pas?form=json&byTags=genre:$genre&count=true&sort=:sortDate|desc&range=$firstIndex-$lastIndex&fields=id,title,thumbnails,programType,:urlSlug,:youtubeTrailer,pubDate&lang=da");
+  $res = file_get_contents("https://feed.entertainment.tv.theplatform.eu/f/jGxigC/bb-all-pas?form=json&byTags=genre:$genre&q=(estProductAvailability%3A\"available\"%20OR%20tvodProductAvailability%3A\"available\")&count=true&sort=:sortDate|desc&range=$firstIndex-$lastIndex&fields=id,title,thumbnails,programType,:urlSlug,:youtubeTrailer,pubDate&lang=da");
   $resData = json_decode($res, true);
   // $movie['plprogram$programType'];
 
@@ -34,7 +34,7 @@ function listGenreMovies(string $genre, int $page = 1, int $per_page = 60){
     $tempMovie->Id = $movieId;
     $tempMovie->Title = $movie['title'];
     $tempMovie->Thumbnail = @$movie['plprogram$thumbnails']['orig-396x272']['plprogram$url'] ?: '/img/poster/none.png';
-    $tempMovie->Slug = $movie['tdc$urlSlug'];
+    $tempMovie->Slug = @$movie['tdc$urlSlug'] ?: 'none';
     $tempMovie->YoutubeTrailer = @$movie['tdc$youtubeTrailer'] ?: 'none';
 
     array_push($returnArr["movies"], $tempMovie);

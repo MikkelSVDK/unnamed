@@ -30,6 +30,25 @@ $genreMovieList = listGenreMovies($_GET["q"], @$_GET["page"] ?: 1);
         </div>
 <?php } ?>
       </div>
+<?php
+if($genreMovieList["meta"]["totalPages"] > 1):
+  $startPage = max(1, $genreMovieList["meta"]["currentPage"] - 5);
+  $endPage = min($genreMovieList["meta"]["currentPage"] + 6, $genreMovieList["meta"]["totalPages"]);
+?>
+      <ul class="pagination">
+        <li class="page-item <?= $startPage == $genreMovieList["meta"]["currentPage"] ? 'disabled' : '' ?>">
+          <a class="page-link" href="?page=<?= isset($_GET["page"]) ? $_GET["page"] - 1 : 1 ?>">&laquo;</a>
+        </li>
+<?php for($loopPage = $startPage; $loopPage <= $endPage; $loopPage++){ ?>
+        <li class="page-item <?= $genreMovieList["meta"]["currentPage"] ==  $loopPage ? 'active' : '' ?>">
+          <a class="page-link" href="?page=<?= $loopPage ?>"><?= $loopPage ?></a>
+        </li>
+<?php } ?>
+        <li class="page-item <?= $endPage == $genreMovieList["meta"]["currentPage"] ? 'disabled' : '' ?>">
+          <a class="page-link" href="?page=<?= isset($_GET["page"]) ? $_GET["page"] + 1 : 2 ?>">&raquo;</a>
+        </li>
+      </ul>
+<?php endif; ?>
     </div>
 <?php require("includes/footer.php") ?>
   </body>
