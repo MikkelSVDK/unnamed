@@ -52,7 +52,7 @@ class Genre extends Movie {
       $tempMovie->Id = $movieId;
       $tempMovie->Slug = @$movie['tdc$urlSlug'] ?: 'none';
       $tempMovie->Title = $movie['title'];
-      $tempMovie->Thumbnail = count($movie['plprogram$thumbnails']) > 0 ? $movie['plprogram$thumbnails']['orig-396x272']['plprogram$url'] : '/img/poster/none.png';
+      $tempMovie->Thumbnail = @$movie['plprogram$thumbnails']['orig-396x272']['plprogram$url'] ?: '/img/poster/none.png';
       $tempMovie->YoutubeTrailer = $movie['tdc$youtubeTrailer'];
 
       array_push($returnArr, $tempMovie);

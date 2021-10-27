@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="#">XYZ</a>
+              <a class="nav-link" href="/favorites">Favoritter</a>
             </li>
             <!--<li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="download">Superhero <span class="caret"></span></a>

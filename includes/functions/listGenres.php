@@ -9,26 +9,48 @@ function listGenres(){
 
   $genreArr = [
     [
-      "id" => 1,
       "slug" => "action",
-      "name" => "Action",
-      "totalEntries" => 8421
+      "name" => "Action"
     ],
     [
-      "id" => 2,
+      "slug" => "animation",
+      "name" => "Animation"
+    ],
+    [
+      "slug" => "drama",
+      "name" => "Drama"
+    ],
+    [
+      "slug" => "adventure",
+      "name" => "Adventure"
+    ],
+    [
+      "slug" => "horror",
+      "name" => "Horror"
+    ],
+    [
+      "slug" => "comedy",
+      "name" => "Komedie"
+    ],
+    [
+      "slug" => "crime",
+      "name" => "Krimi"
+    ],
+    [
       "slug" => "thriller",
-      "name" => "Thriller",
-      "totalEntries" => 1249
+      "name" => "Thriller"
     ]
   ];
 
   $returnArr = [];
   foreach ($genreArr as $genre){
+    $res = file_get_contents("https://feed.entertainment.tv.theplatform.eu/f/jGxigC/bb-all-pas?entries=false&count=true&byTags=genre:$genre[slug]&range=1-1&q=(estProductAvailability%3A%22available%22%20OR%20tvodProductAvailability%3A%22available%22)&form=json&lang=da");
+    $resData = json_decode($res, true);
+    
     $tempGenre = new Genre();
-    $tempGenre->Id = $genre["id"];
     $tempGenre->Slug = $genre["slug"];
     $tempGenre->Name = $genre["name"];
-    $tempGenre->MovieCount = $genre["totalEntries"];
+    $tempGenre->MovieCount = $resData["totalResults"];
 
     array_push($returnArr, $tempGenre);
   }

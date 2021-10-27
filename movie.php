@@ -23,7 +23,10 @@ $movie = new Movie($_GET["q"]);
 
       <div class="row movie-preview">
         <div class="col-lg-12">
-          <h1><?= $movie->Title ?></h1>
+          <h1>
+            <button id="fav-button" class="favorite-button <?= in_array($_GET["q"], $_SESSION["FavoriteMovies"]) ? 'fav' : 'not-fav' ?>"><i class="fas fa-heart"></i></button>
+            <?= $movie->Title ?>
+          </h1>
         </div>
         <div class="col-lg-4" style="margin-bottom:10px">
           <b class="movie-highlight"> 
@@ -110,5 +113,31 @@ foreach ($movie->Actors as $key => $actor) {
 <?php require("includes/footer.php") ?>
   </body>
   <script src="/js/jquery.min.js"></script>
+  <script src="https://kit.fontawesome.com/5cf283aa4d.js" crossorigin="anonymous"></script>
   <script src="/js/custom.js"></script>
+  <script>
+    const hoverEvent = e => {
+      if(e.type == 'mouseenter')
+        $('#fav-button').html('<i class="fas fa-heart-broken"></i>')
+      else
+        $('#fav-button').html('<i class="fas fa-heart"></i>')
+    }
+
+    let favBtn = $('#fav-button');
+    $('#fav-button.fav').hover(hoverEvent);
+    
+    favBtn.click(() => {
+      if(favBtn.hasClass("not-fav")){
+        favBtn.removeClass("not-fav").addClass("fav")
+        favBtn.hover(hoverEvent);
+
+        $.get(`/actions/favorite/add?movie=<?= $_GET["q"] ?>`);
+      }else{
+        favBtn.removeClass("fav").addClass("not-fav")
+        favBtn.off('mouseenter mouseleave');
+
+        $.get(`/actions/favorite/remove?movie=<?= $_GET["q"] ?>`);
+      }
+    });
+  </script>
 </html>

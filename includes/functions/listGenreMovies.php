@@ -13,9 +13,13 @@ function listGenreMovies(string $genre, int $page = 1, int $per_page = 60){
 
   $res = file_get_contents("https://feed.entertainment.tv.theplatform.eu/f/jGxigC/bb-all-pas?form=json&byTags=genre:$genre&q=(estProductAvailability%3A\"available\"%20OR%20tvodProductAvailability%3A\"available\")&count=true&sort=:sortDate|desc&range=$firstIndex-$lastIndex&fields=id,title,thumbnails,programType,:urlSlug,:youtubeTrailer,pubDate&lang=da");
   $resData = json_decode($res, true);
-  // $movie['plprogram$programType'];
+      
+  $tempGenre = new Genre();
+  $tempGenre->Slug = $genre;
+  $tempGenre->Name = ucfirst($genre);
 
   $returnArr = [
+    "genre" => $tempGenre,
     "movies" => [],
     "meta" => [
       "currentCount" => $resData["entryCount"],

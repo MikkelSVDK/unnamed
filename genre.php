@@ -11,14 +11,14 @@ $genreMovieList = listGenreMovies($_GET["q"], @$_GET["page"] ?: 1);
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Action Film & Serier - Unnamed</title>
+    <title><?= $genreMovieList["genre"]->Name ?> Film & Serier - Unnamed</title>
 <?php require("includes/head.php"); ?>
   </head>
   <body>
 <?php require("includes/navbar.php") ?>
     <div class="container main">
 
-      <h1>Action Film & Serier <span class="float-right"><?= $genreMovieList["meta"]["totalCount"] ?> titler</span></h1>
+      <h1><?= $genreMovieList["genre"]->Name ?> Film & Serier <span class="float-right"><?= $genreMovieList["meta"]["totalCount"] ?> titler</span></h1>
       <hr class="header-hr">
       <div class="row">
 <?php foreach ($genreMovieList["movies"] as $movie) { ?>

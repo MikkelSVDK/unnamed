@@ -48,6 +48,7 @@ class Movie {
       $this->Description = $movieData['plprogram$longDescription'];
       $this->Runtime = $movieData['plprogram$runtime'];
       $this->ReleaseDate = $movieData['plprogram$pubDate'];
+      $this->Thumbnail = @$movieData['plprogram$thumbnails']['orig-396x272']['plprogram$url'] ?: '/img/poster/none.png';
       $this->Poster = @$movieData['plprogram$thumbnails']['orig-396x272']['plprogram$url'] ?: '/img/poster/none.png';
       $this->YoutubeTrailer = @$movieData['tdc$youtubeTrailer'] ?: 'none';
       $this->BackDrop = $movieBackDrop;

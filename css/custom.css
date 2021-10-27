@@ -82,6 +82,20 @@ iframe.youtube {
 .movie-highlight {
   color: #19d419;
 }
+.favorite-button{
+  border: unset;
+  background-color: unset;
+  color: rgb(99, 99, 99);
+}
+.favorite-button.not-fav:hover {
+  color: red;
+}
+.favorite-button.fav {
+  color: red;
+}
+.favorite-button.fav:hover {
+  color: rgb(99, 99, 99);
+}
 .footer {
   position: unset;
   bottom: 0;
