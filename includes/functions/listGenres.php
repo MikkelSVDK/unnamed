@@ -13,32 +13,36 @@ function listGenres(){
       "name" => "Action"
     ],
     [
-      "slug" => "animation",
-      "name" => "Animation"
+      "slug" => "comedy",
+      "name" => "Komedie"
+    ],
+    [
+      "slug" => "thriller",
+      "name" => "Thriller"
+    ],
+    [
+      "slug" => "war",
+      "name" => "Krig"
+    ],
+    [
+      "slug" => "romance",
+      "name" => "Romantik"
     ],
     [
       "slug" => "drama",
       "name" => "Drama"
     ],
     [
-      "slug" => "adventure",
-      "name" => "Adventure"
-    ],
-    [
-      "slug" => "horror",
-      "name" => "Horror"
-    ],
-    [
-      "slug" => "comedy",
-      "name" => "Komedie"
-    ],
-    [
       "slug" => "crime",
       "name" => "Krimi"
     ],
     [
-      "slug" => "thriller",
-      "name" => "Thriller"
+      "slug" => "documentary",
+      "name" => "Dokumentar"
+    ],
+    [
+      "slug" => "horror",
+      "name" => "Horror"
     ]
   ];
 
