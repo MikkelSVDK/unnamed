@@ -16,3 +16,8 @@ $(() => {
      .css('background-image', 'linear-gradient(to bottom, rgba(255,255,255,0) -400%, var(--bs-body-bg)), url("' + $backDrop + '")');
   }
 });
+
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})

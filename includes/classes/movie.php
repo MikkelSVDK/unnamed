@@ -21,7 +21,7 @@ class Movie {
   public array $Actors;
 
 
-  /** https://feed.entertainment.tv.theplatform.eu/f/jGxigC/all_movies_ml?form=json&byTags=genre:action&count=true&sort=:sortDate|desc&range=1-40&fields=id,guid,title,thumbnails,programType,:urlSlug,:youtubeTrailer,pubDate&lang=da
+  /** 
    * Constructer
    *
    * @param int $id  Id of the movie 

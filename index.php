@@ -1,6 +1,8 @@
 <?php
+// Include core functions and models
 require("includes/functions/core.php");
 
+// Function to get a list of genres
 $genreList = listGenres();
 ?>
 <!DOCTYPE html>
@@ -15,21 +17,30 @@ $genreList = listGenres();
 
       <h1>Alle Genrerne</h1>
       <div class="row genre-selector">
-<?php foreach ($genreList as $genre) { ?>
+<?php
+// Loops all genres and creates a button for each
+foreach ($genreList as $genre) {
+?>
       <div class="col-lg-3">
         <div class="d-grid">
           <a href="#<?= $genre->Slug ?>" class="btn btn-lg btn-primary"><?= $genre->Name ?></a>
         </div>
       </div>
-<?php } ?>
+<?php
+} // End genre button loop
+?>
       </div>
 
-<?php foreach ($genreList as $genre) { ?>
+<?php
+// Loops all genres and creates a category
+foreach ($genreList as $genre) {
+?>
       <a id="<?= $genre->Slug ?>" style="padding-top:72px;color:transparent;"><?= $genre->Slug ?></a>
       <h3 class="genre-title"><?= $genre->MovieCount ?> x <?= $genre->Name ?> film <span class="float-right"><a href="/genre/<?= $genre->Slug ?>" class="btn btn-primary btn-sm">Se alle</a></span></h3>
       <hr class="header-hr">
       <div class="row" id="row-<?= $genre->Slug ?>">
 <?php
+// Get 5 recommended movies from genre and displays them
 $genreMovieRecommended = $genre->recommendedMovies();
 foreach ($genreMovieRecommended as $movie) {
 ?>
@@ -39,12 +50,16 @@ foreach ($genreMovieRecommended as $movie) {
           </a>
           <p class="text-center"><?= $movie->Title ?></p>
         </div>
-<?php } ?>
+<?php
+} // End of genre movie loop
+?>
       </div>
       <div class="text-center">
         <button class="btn btn-primary load-more" data-genre="<?= $genre->Slug ?>">Indlæs flere</button>
       </div>
-<?php } ?>
+<?php
+} // End genre category loop
+?>
       
     </div>
 <?php require("includes/footer.php") ?>

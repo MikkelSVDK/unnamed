@@ -5,8 +5,7 @@
  * @return array 
  */
 function listGenres(){
-  // CALL API if i find it
-
+  // Array of genres 
   $genreArr = [
     [
       "slug" => "action",
@@ -46,11 +45,14 @@ function listGenres(){
     ]
   ];
 
+  // Define return array and loop through genre array
   $returnArr = [];
   foreach ($genreArr as $genre){
+    // Request genre entry count
     $res = file_get_contents("https://feed.entertainment.tv.theplatform.eu/f/jGxigC/bb-all-pas?entries=false&count=true&byTags=genre:$genre[slug]&range=1-1&q=(estProductAvailability%3A%22available%22%20OR%20tvodProductAvailability%3A%22available%22)&form=json&lang=da");
     $resData = json_decode($res, true);
     
+    // Define genre
     $tempGenre = new Genre();
     $tempGenre->Slug = $genre["slug"];
     $tempGenre->Name = $genre["name"];

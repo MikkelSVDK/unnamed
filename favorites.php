@@ -1,4 +1,5 @@
 <?php
+// Include core functions and models
 require("includes/functions/core.php");
 ?>
 <!DOCTYPE html>
@@ -14,7 +15,10 @@ require("includes/functions/core.php");
       <h1>Dine favoritter</h1>
       <div class="row">
 <?php
+// Loop all movies from SESSION
 foreach ($_SESSION["FavoriteMovies"] as $movieId) {
+
+  // Get movie data
   $movie = new Movie($movieId);
 ?>
         <div class="col-xl-2 col-md-4 col-sm-6 movie-poster">

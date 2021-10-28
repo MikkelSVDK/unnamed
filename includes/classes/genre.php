@@ -39,7 +39,6 @@ class Genre extends Movie {
 
     $res = file_get_contents("https://feed.entertainment.tv.theplatform.eu/f/jGxigC/bb-all-pas?form=json&byTags=genre:" . $this->Slug . "&q=(estProductAvailability%3A\"available\"%20OR%20tvodProductAvailability%3A\"available\")&count=true&sort=:sortDate|desc&range=$firstIndex-$lastIndex&fields=id,title,thumbnails,programType,:urlSlug,:youtubeTrailer,pubDate&lang=da");
     $resData = json_decode($res, true);
-    // $movie['plprogram$programType'];
 
     $returnArr = [];
 

@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+// Start favorite movie session
 if(!isset($_SESSION["FavoriteMovies"]))
   $_SESSION["FavoriteMovies"] = [];
 
