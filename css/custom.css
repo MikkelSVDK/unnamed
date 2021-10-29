@@ -99,6 +99,19 @@ iframe.youtube {
 .favorite-button.fav:hover {
   color: rgb(99, 99, 99);
 }
+.remove-favorite {
+  float: right;
+  font-size: 150%;
+  background-color: unset;
+  border: unset;
+  color: white;
+}
+.remove-favorite:hover {
+  color: red;
+}
+.remove-favorite:active {
+  color: rgb(168, 0, 0);
+}
 .footer {
   position: unset;
   bottom: 0;

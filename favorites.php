@@ -15,19 +15,32 @@ require("includes/functions/core.php");
       <h1>Dine favoritter</h1>
       <div class="row">
 <?php
-// Loop all movies from SESSION
-foreach ($_SESSION["FavoriteMovies"] as $movieId) {
+//
+if(count($_SESSION["FavoriteMovies"]) > 0){
 
-  // Get movie data
-  $movie = new Movie($movieId);
+  // Loop all movies from SESSION
+  foreach ($_SESSION["FavoriteMovies"] as $movieId) {
+
+    // Get movie data
+    $movie = new Movie($movieId);
 ?>
         <div class="col-xl-2 col-md-4 col-sm-6 movie-poster">
+          <button id="remove-btn" data-movie-id="<?= $movie->Id ?>" class="remove-favorite">✕</button>
           <a href="/movie/<?= $movie->Id ?>">
             <img src="<?= $movie->Thumbnail ?>" alt="movie poster" class="img-fluid" />
           </a>
           <p class="text-center"><?= $movie->Title ?></p>
         </div>
-<?php } ?>
+<?php
+  } // End movie loop
+}else{ // Display info message
+?>
+        <div class="col-12" style="margin:10vh 0">
+          <h2 class="text-center">Du har ikke tilføjet nogle film til dine favoritter</h2>
+        </div>
+<?php
+}
+?>
       </div>
     </div>
 <?php require("includes/footer.php") ?>
@@ -35,5 +48,16 @@ foreach ($_SESSION["FavoriteMovies"] as $movieId) {
   <script src="/js/jquery.min.js"></script>
   <script src="/js/custom.js"></script>
   <script>
+    $('#remove-btn').click(e => {
+      let removeBtn = $(e.target)
+
+      let rowDiv = removeBtn.parent().parent();
+      if(rowDiv.length == 1)
+        rowDiv.append($('<div>', { class: 'col-12', style: 'margin:10vh 0' })
+         .append($('<h2>', { class: 'text-center', html: 'Du har ikke tilføjet nogle film til dine favoritter' })))
+
+      $.get(`/actions/favorite/remove?movie=${removeBtn.data("movieId")}`);
+      removeBtn.parent().remove()
+    });
   </script>
 </html>
