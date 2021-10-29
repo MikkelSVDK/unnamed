@@ -20,7 +20,8 @@
             </div>
           </div>
           <div class="col-md-4">
-            <h3>Betalningsmuligheder</h3>
+            <h3>Trustpilot</h3>
+            <img src="/img/attr/trustpilot.png" alt="Trustpilot" class="img-fluid" />
           </div>
         </div>
       </div>
