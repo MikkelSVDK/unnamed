@@ -25,7 +25,7 @@ if(count($_SESSION["FavoriteMovies"]) > 0){
     $movie = new Movie($movieId);
 ?>
         <div class="col-xl-2 col-md-4 col-sm-6 movie-poster">
-          <button id="remove-btn" data-movie-id="<?= $movie->Id ?>" class="remove-favorite">✕</button>
+          <button data-movie-id="<?= $movie->Id ?>" class="remove-favorite">✕</button>
           <a href="/movie/<?= $movie->Id ?>">
             <img src="<?= $movie->Thumbnail ?>" alt="movie poster" class="img-fluid" />
           </a>
@@ -48,11 +48,11 @@ if(count($_SESSION["FavoriteMovies"]) > 0){
   <script src="/js/jquery.min.js"></script>
   <script src="/js/custom.js"></script>
   <script>
-    $('#remove-btn').click(e => {
+    $('.remove-favorite').click(e => {
       let removeBtn = $(e.target)
 
       let rowDiv = removeBtn.parent().parent();
-      if(rowDiv.length == 1)
+      if(rowDiv.children().length == 1)
         rowDiv.append($('<div>', { class: 'col-12', style: 'margin:10vh 0' })
          .append($('<h2>', { class: 'text-center', html: 'Du har ikke tilføjet nogle film til dine favoritter' })))
 
